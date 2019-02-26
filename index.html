@@ -489,7 +489,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/02/10/ubuntu18-04-配置必备工具/" itemprop="url">ubuntu18.04----配置必备工具</a></h1>
+                <a class="post-title-link" href="/2019/02/10/ubuntu18-04-配置必备工具/" itemprop="url">Ubuntu18.04----配置必备工具</a></h1>
         
 
         <div class="post-meta">
@@ -541,7 +541,8 @@
       
         
           
-            <h2 id="换源"><a href="#换源" class="headerlink" title="换源"></a>换源</h2><p>装好ubuntu18.04的第一件事就是更换软件源，不然就不能愉快地完成后续环境的配置了。<br>换源需要修改的配置文件为sources.list，在/etc/apt目录下。  </p>
+            <p>相信小伙伴们大都开始在企业的实习了，这篇博客将帮助你快速地在企业的全新电脑上完成Ubuntu必备工具的配置。</p>
+<h2 id="换源"><a href="#换源" class="headerlink" title="换源"></a>换源</h2><p>装好系统后的第一件事就是更换软件源，不然就不能愉快地完成后续环境的配置了。<br>换源需要修改的配置文件为sources.list，在/etc/apt目录下。  </p>
 <ol>
 <li><p>打开sources.list文件：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
@@ -551,21 +552,29 @@
 </li>
 </ol>
 <p>然后更新<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt upgrade</span><br></pre></td></tr></table></figure></p>
-<h2 id="驱动"><a href="#驱动" class="headerlink" title="驱动"></a>驱动</h2><p>当你在浏览器里滚动页面时，会留意到页面有明显的卡顿。因此，我们需要安装驱动。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ubuntu-drivers autoinstall</span><br></pre></td></tr></table></figure></p>
+<h2 id="显卡驱动"><a href="#显卡驱动" class="headerlink" title="显卡驱动"></a>显卡驱动</h2><p>当你在浏览器里滚动页面时，会留意到页面有明显的卡顿。因此，我们需要安装显卡驱动。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ubuntu-drivers autoinstall</span><br></pre></td></tr></table></figure></p>
 <p>驱动下载安装的时间较长，请耐心等待。安装完成后重启，系统将变得较为流畅。</p>
-<h2 id="中文输入法"><a href="#中文输入法" class="headerlink" title="中文输入法"></a>中文输入法</h2><p>ubuntu18.04配置中文输入法比较简单，只需要在设置里配置就行。</p>
+<h2 id="中文输入法"><a href="#中文输入法" class="headerlink" title="中文输入法"></a>中文输入法</h2><p>Ubuntu18.04自带中文输入法，但我还是更青睐搜狗。</p>
 <ol>
-<li>首先进入设置，打开语言选项  </li>
-<li>点击manage installed languages，安装必要的软件</li>
-<li>在keyboard input method system中选择ibus或着xim。然后apply sysytem-wide</li>
-<li>重启，进入设置语言选项，在input sources选择Chinese(intelligent pinyin)  </li>
+<li>首先，安装Fcitx输入框架：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install fcitx</span><br><span class="line">```  </span><br><span class="line">2. 进入官网，下载搜狗输入法的deb包，点击install完成安装。</span><br><span class="line">3. 进入设置，打开语言选项，点击Manage Installed Languages，安装必要的软件。</span><br><span class="line">4. 在keyboard input method system中选择fcitx，并apply sysytem-wide。</span><br><span class="line">5. 重启系统，点击右上角的键盘标志，选择Configure Current Input Method。进入Input Method界面后，选择+号。</span><br><span class="line">6. 进入Add Input Method界面，取消下方Only Show Current Language的选项，在搜索栏搜索Sougou，选中之后进行添加。</span><br><span class="line"></span><br><span class="line">成功安装搜狗输入法后，就可以愉快地进行技术交流了。</span><br><span class="line"></span><br><span class="line"><span class="comment">## 解决时间问题</span></span><br><span class="line"></span><br><span class="line">Win-Ubuntu双系统的电脑可能会出现时间问题，解决方案如下：</span><br><span class="line">```bash</span><br><span class="line">sudo apt-get install ntpdate</span><br><span class="line">sudo ntpdate time.windows.com</span><br><span class="line">sudo hwclock --localtime --systohc</span><br></pre></td></tr></table></figure>
+</li>
 </ol>
-<p>然后就可以在top bar的语言选项中看到Chinese(intelligent pinyin) 选项了</p>
-<h2 id="解决时间问题"><a href="#解决时间问题" class="headerlink" title="解决时间问题"></a>解决时间问题</h2><p>win-ubuntu双系统的电脑可能会出现时间问题，解决方案如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install ntpdate</span><br><span class="line">sudo ntpdate time.windows.com</span><br><span class="line">sudo hwclock --localtime --systohc</span><br></pre></td></tr></table></figure></p>
-<h2 id="ss"><a href="#ss" class="headerlink" title="ss"></a>ss</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install shadowsocks-libev</span><br><span class="line">sudo gedit /etc/shadowsocks-libev/config.json（配置文件）</span><br><span class="line">sudo systemctl <span class="built_in">enable</span> shadowsocks-libev-local@config.service</span><br><span class="line">sudo systemctl start shadowsocks-libev-local@config.service（开机自启）</span><br></pre></td></tr></table></figure>
+<h2 id="SS"><a href="#SS" class="headerlink" title="SS"></a>SS</h2><ol>
+<li>执行如下命令，在电脑中安装SS。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install shadowsocks-libev</span><br><span class="line">sudo gedit /etc/shadowsocks-libev/config.json（配置文件）</span><br><span class="line">sudo systemctl <span class="built_in">enable</span> shadowsocks-libev-local@config.service</span><br><span class="line">sudo systemctl start shadowsocks-libev-local@config.service（开机自启）</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>在配置文件中，需要正确设置服务器IP、服务器端口号、本地端口号(1080)、密码、加密方式等信息。</p>
+<ol start="2">
+<li>进入Chrome浏览器，下载Proxy SwitchyOmega扩展程序。</li>
+</ol>
 <h2 id="Telegram"><a href="#Telegram" class="headerlink" title="Telegram"></a>Telegram</h2><p>没有QQ，如何在ubuntu系统下愉快地交流呢？推荐一款纯净的通信软件——Telegram。</p>
 <p>执行如下命令，即可完成Telegram的安装：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:atareao/telegram</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install telegram</span><br></pre></td></tr></table></figure></p>
 <p>但要想愉快地使用它，还需要完成如下的配置工作：</p>
+<ol>
+<li>点击左下角的图标，进入Proxy settings。</li>
+<li>选择Use custom proxy，添加代理。</li>
+<li>将代理模式设置为SOCKS5，将代理主机名和端口分别设置为127.0.0.1和1080。</li>
+</ol>
 
           
         

@@ -414,7 +414,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/02/11/ubuntu18-04-CV环境配置/" itemprop="url">ubuntu18.04----CV环境配置</a></h1>
+                <a class="post-title-link" href="/2019/02/11/ubuntu18-04-CV环境配置/" itemprop="url">Ubuntu18.04----CV环境配置</a></h1>
         
 
         <div class="post-meta">
@@ -470,12 +470,12 @@
 <p>在1-stage和2-stage模型中来去自如，加入自己的brilliant ideas？</p>
 <p>训练效果良好，再次实现mAP的飞跃？</p>
 <p>别做梦了，先配置环境吧。</p>
-<p>注：电脑系统为ubuntu18.04，显卡为RTX2080。</p>
+<p>注：电脑系统为ubuntu18.04，CPU为i5-8500，内存为16GB，显卡为RTX2080，显存8G。</p>
 <h2 id="CUDA"><a href="#CUDA" class="headerlink" title="CUDA"></a>CUDA</h2><p>CUDA是Nvidia的一个并行计算的平台，PyTorch、Tensorflow等框架的GPU加速都需要CUDA的支持。</p>
-<h3 id="驱动"><a href="#驱动" class="headerlink" title="驱动"></a>驱动</h3><p>CUDA需要Nvidia的驱动，而ubuntu的驱动不一定是原装驱动，所以要重新安装驱动。</p>
-<h4 id="卸载老驱动"><a href="#卸载老驱动" class="headerlink" title="卸载老驱动"></a>卸载老驱动</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get purge nvidia*</span><br></pre></td></tr></table></figure>
-<h4 id="禁止自带的nouveau-nvidia驱动"><a href="#禁止自带的nouveau-nvidia驱动" class="headerlink" title="禁止自带的nouveau nvidia驱动"></a>禁止自带的nouveau nvidia驱动</h4><ol>
-<li><p>为了禁止自带的驱动，要代开blacklist-nouveau.conf：</p>
+<h3 id="驱动"><a href="#驱动" class="headerlink" title="驱动"></a>驱动</h3><p>CUDA需要Nvidia的驱动，而Ubuntu的驱动不一定是原装驱动，所以要重新安装驱动。</p>
+<h4 id="卸载旧的Nvidia驱动"><a href="#卸载旧的Nvidia驱动" class="headerlink" title="卸载旧的Nvidia驱动"></a>卸载旧的Nvidia驱动</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get purge nvidia*</span><br></pre></td></tr></table></figure>
+<h4 id="禁用系统自带的nouveau-nvidia驱动"><a href="#禁用系统自带的nouveau-nvidia驱动" class="headerlink" title="禁用系统自带的nouveau nvidia驱动"></a>禁用系统自带的nouveau nvidia驱动</h4><ol>
+<li><p>为了禁用系统自带的驱动，要代开blacklist-nouveau.conf：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit /etc/modprobe.d/blacklist-nouveau.conf</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>在文件中添加止配置的内容：</p>
@@ -485,7 +485,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update-initramfs -u</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<h4 id="安装新驱动"><a href="#安装新驱动" class="headerlink" title="安装新驱动"></a>安装新驱动</h4><p>在卸载了老的驱动之后需要重启，由于卸载了驱动，所以重启之后的电脑可能显示效果不佳，但是基本操作可以，如果不能进入图形化桌面，可以按 CTRL + ALT + F3/F4/F5/F6 键登录命令行模式，安装显卡驱动。</p>
+<h4 id="安装新的Nvidia驱动"><a href="#安装新的Nvidia驱动" class="headerlink" title="安装新的Nvidia驱动"></a>安装新的Nvidia驱动</h4><p>重启电脑，安装新的显卡驱动。</p>
 <ol>
 <li>确认之前的操作<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsmod | grep nouveau</span><br></pre></td></tr></table></figure>
 </li>
@@ -499,8 +499,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ubuntu-drivers devices</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-  
-<p>图中为输出结果，其中driver后便是驱动不同版本名称，选择最新的（recommended）安装  </p>
+<p>driver后便是驱动不同版本名称，选择最新的（recommended）安装。  </p>
 <ol start="4">
 <li><p>安装并重启</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install nvidia-driver-410</span><br><span class="line">sudo reboot</span><br></pre></td></tr></table></figure>
@@ -509,45 +508,44 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvidia-smi</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>通过这个命令你可以查看nvidia显卡的状态，包括进程、现存等信息。</p>
-<h3 id="GCC-版本问题"><a href="#GCC-版本问题" class="headerlink" title="GCC 版本问题"></a>GCC 版本问题</h3><p>CUDA9.0安装要求gcc/g++版本是5.x或者6.x，而ubuntu18.04的gcc/g++版本一般是7.0（可以通过gcc/g++ -v查看）。所以需要自己配置</p>
-<ol>
-<li><p>安装5.0</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install gcc-5</span><br><span class="line">sudo apt-get install g++-5</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>替换</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 50</span><br><span class="line">sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 50</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>最后的50代表版本优先级，最后确认。</p>
-<ol start="3">
-<li>还原<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo update-alternatives --config gcc</span><br><span class="line">sudo update-alternatives --config g++</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>这个命令可以看到可选的gcc/g++版本。之后想要还原可以选择相应的序号。</p>
+<p>通过这个命令你可以查看nvidia显卡的状态，包括进程、显存等信息。</p>
+<h3 id="GCC-版本问题"><a href="#GCC-版本问题" class="headerlink" title="GCC 版本问题"></a>GCC 版本问题</h3><p>CUDA10.0安装已经不要求gcc/g++版本是5.x或者6.x，所以我们直接使用Ubuntu18.04的7.0版gcc/g++即可。</p>
 <h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install freeglut3-dev build-essential libx11-dev libxmu-dev libxi-dev libgl1-mesa-glx libglu1-mesa libglu1-mesa-dev</span><br></pre></td></tr></table></figure>
-<h3 id="安装cuda9-0"><a href="#安装cuda9-0" class="headerlink" title="安装cuda9.0"></a>安装cuda9.0</h3><p>在官网<a href="https://developer.nvidia.com/cuda-90-download-archive?target_os=Linux&amp;target_arch=x86_64&amp;target_distro=Ubuntu&amp;target_version=1704&amp;target_type=runfilelocal" target="_blank" rel="noopener">cuda下载</a>选择Ubuntu,17.04(写文章时还没有18.04，以17.04替换，可以工作)，runfile（local），base installer下载。<br>然后安装（具体版本号可能会有不同）：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sh cuda_9.0.176_384.81_linux.run</span><br></pre></td></tr></table></figure></p>
-<p>注：安装前一定装好依赖，在安装时，前三个选项注意<br>第一个问题read EULA：选accept<br>第二个问题install on an unsupported configuration：选y（默认是no！！！）<br>第三个问题install Nvdia accelerated Graphics Driver：选no（之前已经装好）<br>其他的都可以default，y</p>
+<h3 id="安装CUDA10-0"><a href="#安装CUDA10-0" class="headerlink" title="安装CUDA10.0"></a>安装CUDA10.0</h3><p>在官网<a href="https://developer.nvidia.com/cuda-downloads?target_os=Linux&amp;target_arch=x86_64&amp;target_distro=Ubuntu&amp;target_version=1804&amp;target_type=runfilelocal" target="_blank" rel="noopener">CUDA10.0下载</a>选择Ubuntu18.04，runfile(local), base installer下载。<br>然后安装（具体版本号可能会有不同）：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sh cuda_10.1.105_418.39_linux.run</span><br></pre></td></tr></table></figure></p>
+<p>注：安装前一定装好依赖，安装时注意两个问题：<br>第一个问题install on an unsupported configuration：选y（默认是no！！！）<br>第二个问题install Nvdia accelerated Graphics Driver：选no（之前已经装好）<br>其他的都可以default，y</p>
 <h3 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h3><p>打开bashrc文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit ~/.bashrc</span><br></pre></td></tr></table></figure></p>
 <p>添加路径：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=/usr/<span class="built_in">local</span>/cuda-9.0/bin<span class="variable">$&#123;PATH:+:$&#123;PATH&#125;</span>&#125;  </span><br><span class="line"><span class="built_in">export</span> LD_LIBRARY_PATH=/usr/<span class="built_in">local</span>/cuda-9.0/lib64<span class="variable">$&#123;LD_LIBRARY_PATH:+:$&#123;LD_LIBRARY_PATH&#125;</span>&#125;</span><br></pre></td></tr></table></figure></p>
 <p>激活<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure></p>
-<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>一个绿色（？？？？）的流体模拟软件,注意这里要求gcc/g++ 版本不能高于6<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/NVIDIA_CUDA-9.0_Samples/5_Simulations/fluidsGL</span><br><span class="line">make clean &amp;&amp; make</span><br><span class="line">./fluidsGL</span><br></pre></td></tr></table></figure></p>
-<p>然后你就可以看见一潭绿色污水，用鼠标在上面滑动可以扰动这潭死水<br>  </p>
-<h2 id="CUDNN"><a href="#CUDNN" class="headerlink" title="CUDNN"></a>CUDNN</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>安装CUDNN非常简单，进入<a href="https://developer.nvidia.com/cudnn" target="_blank" rel="noopener">官网</a>（官网需要注册,要填写一堆东西后，登陆后才能下载）<br>选择下载(因为没有18.04 所以下16.04的，不过也能用)  </p>
-<blockquote>
-<p>cuDNN v7.3.1 Runtime Library for Ubuntu16.04 (Deb)<br>cuDNN v7.3.1 Developer Library for Ubuntu16.04 (Deb)<br>cuDNN v7.3.1 Code Samples and User Guide for Ubuntu16.04 (Deb)</p>
-</blockquote>
-<p>下载后可以直接安装deb文件</p>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>一个绿色（？？？？）的流体模拟软件。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/NVIDIA_CUDA-9.0_Samples/5_Simulations/fluidsGL</span><br><span class="line">make clean &amp;&amp; make</span><br><span class="line">./fluidsGL</span><br></pre></td></tr></table></figure></p>
+<p>然后你就可以看见一潭绿色污水，用鼠标在上面滑动可以扰动这潭死水  </p>
+<h2 id="cuDNN"><a href="#cuDNN" class="headerlink" title="cuDNN"></a>cuDNN</h2><p>cuDNN是GPU加速计算深层神经网络的库。</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ol>
+<li><p>进入<a href="https://developer.nvidia.com/rdp/cudnn-download" target="_blank" rel="noopener">cuDNN官网</a>注册一个账号，选择相应的下载版本。</p>
+</li>
+<li><p>下载完成后，进入解压后的文件夹下的include目录，并执行如下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd cuda/include</span><br><span class="line">sudo cp cudnn.h /usr/local/cuda/include  #复制头文件到cuda头文件目录</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>进入lib64目录下，对动态文件进行复制和软链接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cd ..</span><br><span class="line">cd lib64</span><br><span class="line">sudo cp lib*/usr/local/cuda/lib64/    #复制动态链接库</span><br><span class="line">cd /usr/local/cuda/lib64/</span><br><span class="line">sudo rm -rf libcudnn.solibcudnn.so.7    #删除原有动态文件</span><br><span class="line">sudo ln -s libcudnn.so.7.5.0 libcudnn.so.7  #生成软衔接</span><br><span class="line">sudo ln -s libcudnn.so.7 libcudnn.so      #生成软链接</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>注意，版本号可能会有所不同。</p>
+<ol start="4">
+<li>安装后，使用nvcc -V 命令验证是否安装成功。</li>
+</ol>
 <h3 id="测试-1"><a href="#测试-1" class="headerlink" title="测试"></a>测试</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cp -r /usr/src/cudnn_samples_v7/ <span class="variable">$HOME</span></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$HOME</span>/cudnn_samples_v7/mnistCUDNN</span><br><span class="line">make clean &amp;&amp; make</span><br><span class="line">./mnistCUDNN</span><br></pre></td></tr></table></figure>
-<p>这里cudnn版本不同对应文件夹名称也不同,最后出现test passed代表通过</p>
-<h2 id="ANACONDA"><a href="#ANACONDA" class="headerlink" title="ANACONDA"></a>ANACONDA</h2><p>anaconda包含了一些数据处理的必要包</p>
-<h3 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h3><p>由于tensorflow目前只支持python3.6，故这里更推荐下载python3.6的anaconda版本，即为Python 3.6 (Anaconda 5.2.0).另外由于不可抗力，清华镜像下载更快。  </p>
+<p>这里cuDNN版本不同对应文件夹名称也不同,最后出现test passed代表通过</p>
+<h2 id="Anaconda"><a href="#Anaconda" class="headerlink" title="Anaconda"></a>Anaconda</h2><p>Anaconda是一个开源的Python发行版本，其包含了conda、Python等180多个科学包及其依赖项。</p>
+<h3 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h3><p>由于TensorFlow目前只支持python3.6，故这里更推荐下载python3.6的anaconda版本，即为Python 3.6 (Anaconda 5.2.0).另外由于不可抗力，清华镜像下载更快。  </p>
 <ul>
 <li>官网下载为<a href="https://www.anaconda.com/download/#linux" target="_blank" rel="noopener">anaconda官网下载</a>。  </li>
 <li>清华镜像下载地址为<a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/" target="_blank" rel="noopener">清华镜像下载</a></li>
 </ul>
 <p>下载后<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash Anaconda3-5.2.0-Linux-x86_64.sh</span><br></pre></td></tr></table></figure></p>
 <p>附：最后一个选项是安装VScode，一个很好用的编辑器。</p>
+<h2 id="OpenCV"><a href="#OpenCV" class="headerlink" title="OpenCV"></a>OpenCV</h2><h2 id="Pytorch"><a href="#Pytorch" class="headerlink" title="Pytorch"></a>Pytorch</h2><p>PyTorch是使用GPU和CPU优化的深度学习张量库。由于调试、编译等多方面的优势，PyTorch已经成为很多科研机构首选的深度学习框架。</p>
+<p>进入<a href="https://pytorch.org/get-started/locally/" target="_blank" rel="noopener">Pytorch官网</a>，选择操作系统、包管理工具、编程语言和CUDA版本，生成本地安装命令。</p>
+<p>安装Pytorch:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install pytorch torchvision cudatoolkit=10.0 -c pytorch</span><br></pre></td></tr></table></figure></p>
 
           
         

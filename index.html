@@ -288,7 +288,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/02/27/Ubuntu18-04-Caffe的安装/" itemprop="url">ubuntu18.04----Caffe的安装</a></h1>
+                <a class="post-title-link" href="/2019/02/27/Ubuntu18-04-Caffe的安装/" itemprop="url">Ubuntu18.04----Caffe的安装</a></h1>
         
 
         <div class="post-meta">
@@ -342,11 +342,7 @@
           
             <p>安装Caffe框架的时候，你一定一定会遇到各种各样的坑。这也是我记下这篇blog的原因。</p>
 <p>安装Caffe框架的前提步骤包括：安装依赖包、禁用nouveau并安装Nvidia显卡驱动、配置环境变量、安装CUDA10.0、安装cuDNN、安装OpenCV。<br>而这些前提步骤中，任意一步的出错都会导致Caffe框架的安装失败。</p>
-<ol>
-<li></li>
-<li><p>利用Anaconda中的OpenCV库</p>
-</li>
-</ol>
+<h1 id="利用上一篇教程中下载的OpenCV库"><a href="#利用上一篇教程中下载的OpenCV库" class="headerlink" title="利用上一篇教程中下载的OpenCV库"></a>利用上一篇教程中下载的OpenCV库</h1><h1 id="利用Anaconda中的OpenCV库"><a href="#利用Anaconda中的OpenCV库" class="headerlink" title="利用Anaconda中的OpenCV库"></a>利用Anaconda中的OpenCV库</h1><p>由于始终无法解决方法1中的OpenCV报错，我尝试使用Anaconda中的OpenCV库，完成Caffe的安装。</p>
 
           
         
@@ -514,9 +510,10 @@
 <h3 id="安装CUDA10-0"><a href="#安装CUDA10-0" class="headerlink" title="安装CUDA10.0"></a>安装CUDA10.0</h3><p>在官网<a href="https://developer.nvidia.com/cuda-downloads?target_os=Linux&amp;target_arch=x86_64&amp;target_distro=Ubuntu&amp;target_version=1804&amp;target_type=runfilelocal" target="_blank" rel="noopener">CUDA10.0下载</a>选择Ubuntu18.04，runfile(local), base installer下载。<br>然后安装（具体版本号可能会有不同）：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sh cuda_10.1.105_418.39_linux.run</span><br></pre></td></tr></table></figure></p>
 <p>注：安装前一定装好依赖，安装时注意两个问题：<br>第一个问题install on an unsupported configuration：选y（默认是no！！！）<br>第二个问题install Nvdia accelerated Graphics Driver：选no（之前已经装好）<br>其他的都可以default，y</p>
 <h3 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h3><p>打开bashrc文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit ~/.bashrc</span><br></pre></td></tr></table></figure></p>
-<p>添加路径：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=/usr/<span class="built_in">local</span>/cuda-9.0/bin<span class="variable">$&#123;PATH:+:$&#123;PATH&#125;</span>&#125;  </span><br><span class="line"><span class="built_in">export</span> LD_LIBRARY_PATH=/usr/<span class="built_in">local</span>/cuda-9.0/lib64<span class="variable">$&#123;LD_LIBRARY_PATH:+:$&#123;LD_LIBRARY_PATH&#125;</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p>添加路径：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=/usr/<span class="built_in">local</span>/cuda-10.0/bin<span class="variable">$&#123;PATH:+:$&#123;PATH&#125;</span>&#125;  </span><br><span class="line"><span class="built_in">export</span> LD_LIBRARY_PATH=/usr/<span class="built_in">local</span>/cuda-10.0/lib64<span class="variable">$&#123;LD_LIBRARY_PATH:+:$&#123;LD_LIBRARY_PATH&#125;</span>&#125;</span><br></pre></td></tr></table></figure></p>
 <p>激活<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure></p>
-<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>一个绿色（？？？？）的流体模拟软件。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/NVIDIA_CUDA-9.0_Samples/5_Simulations/fluidsGL</span><br><span class="line">make clean &amp;&amp; make</span><br><span class="line">./fluidsGL</span><br></pre></td></tr></table></figure></p>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><h4 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h4><p>执行下列命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/cuda-8.0/samples/1_Utilities/deviceQuery</span><br><span class="line">sudo make</span><br><span class="line">./deviceQuery</span><br></pre></td></tr></table></figure></p>
+<h4 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h4><p>一个绿色的流体模拟软件。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/NVIDIA_CUDA-9.0_Samples/5_Simulations/fluidsGL</span><br><span class="line">make clean &amp;&amp; make</span><br><span class="line">./fluidsGL</span><br></pre></td></tr></table></figure></p>
 <p>然后你就可以看见一潭绿色污水，用鼠标在上面滑动可以扰动这潭死水  </p>
 <h2 id="cuDNN"><a href="#cuDNN" class="headerlink" title="cuDNN"></a>cuDNN</h2><p>cuDNN是GPU加速计算深层神经网络的库。</p>
 <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ol>

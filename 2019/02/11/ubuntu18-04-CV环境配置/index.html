@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Towngac">
 <meta property="og:description" content="我永远都不会忘记，在电脑前手忙脚乱配置环境的日子。——鲁迅 在1-stage和2-stage模型中来去自如，加入自己的brilliant ideas？ 训练效果良好，再次实现mAP的飞跃？ 别做梦了，先配置环境吧。 注：电脑系统为ubuntu18.04，CPU为i5-8500，内存为16GB，显卡为RTX2080，显存8G。 CUDACUDA是Nvidia的一个并行计算的平台，PyTorch、Te">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-02T09:20:47.569Z">
+<meta property="og:updated_time" content="2019-03-02T09:23:22.775Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ubuntu18.04----CV环境配置">
 <meta name="twitter:description" content="我永远都不会忘记，在电脑前手忙脚乱配置环境的日子。——鲁迅 在1-stage和2-stage模型中来去自如，加入自己的brilliant ideas？ 训练效果良好，再次实现mAP的飞跃？ 别做梦了，先配置环境吧。 注：电脑系统为ubuntu18.04，CPU为i5-8500，内存为16GB，显卡为RTX2080，显存8G。 CUDACUDA是Nvidia的一个并行计算的平台，PyTorch、Te">
@@ -391,7 +391,7 @@
 <p>激活<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure></p>
 <h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><h4 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h4><p>执行下列命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/cuda-8.0/samples/1_Utilities/deviceQuery</span><br><span class="line">sudo make</span><br><span class="line">./deviceQuery</span><br></pre></td></tr></table></figure></p>
 <h4 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h4><p>一个绿色的流体模拟软件。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/NVIDIA_CUDA-9.0_Samples/5_Simulations/fluidsGL</span><br><span class="line">make clean &amp;&amp; make</span><br><span class="line">./fluidsGL</span><br></pre></td></tr></table></figure></p>
-<p>然后你就可以看见一潭绿色污水，用鼠标在上面滑动可以扰动这潭死水  </p>
+<p>然后你就可以看见一潭绿色污水，用鼠标在上面滑动可以扰动这潭死水。  </p>
 <h2 id="cuDNN"><a href="#cuDNN" class="headerlink" title="cuDNN"></a>cuDNN</h2><p>cuDNN是GPU加速计算深层神经网络的库。</p>
 <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ol>
 <li><p>进入<a href="https://developer.nvidia.com/rdp/cudnn-download" target="_blank" rel="noopener">cuDNN官网</a>注册一个账号，选择相应的下载版本。</p>

@@ -342,7 +342,52 @@
           
             <p>安装Caffe框架的时候，你一定一定会遇到各种各样的坑。这也是我记下这篇blog的原因。</p>
 <p>安装Caffe框架的前提步骤包括：安装依赖包、禁用nouveau并安装Nvidia显卡驱动、配置环境变量、安装CUDA10.0、安装cuDNN、安装OpenCV。<br>而这些前提步骤中，任意一步的出错都会导致Caffe框架的安装失败。</p>
-<h1 id="利用上一篇教程中下载的OpenCV库"><a href="#利用上一篇教程中下载的OpenCV库" class="headerlink" title="利用上一篇教程中下载的OpenCV库"></a>利用上一篇教程中下载的OpenCV库</h1><h1 id="利用Anaconda中的OpenCV库"><a href="#利用Anaconda中的OpenCV库" class="headerlink" title="利用Anaconda中的OpenCV库"></a>利用Anaconda中的OpenCV库</h1><p>由于始终无法解决方法1中的OpenCV报错，我尝试使用Anaconda中的OpenCV库，完成Caffe的安装。</p>
+<h1 id="安装Caffe"><a href="#安装Caffe" class="headerlink" title="安装Caffe"></a>安装Caffe</h1><h3 id="安装依赖包"><a href="#安装依赖包" class="headerlink" title="安装依赖包"></a>安装依赖包</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler</span><br><span class="line"> </span><br><span class="line">sudo apt-get install --no-install-recommends libboost-all-dev</span><br><span class="line"> </span><br><span class="line">sudo apt-get install libopenblas-dev liblapack-dev libatlas-base-dev</span><br><span class="line"> </span><br><span class="line">sudo apt-get install libgflags-dev libgoogle-glog-dev liblmdb-dev</span><br><span class="line"> </span><br><span class="line">sudo apt-get install git cmake build-essential</span><br></pre></td></tr></table></figure>
+<h3 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h3><ol>
+<li><p>打开配置文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit ~/.bashrc</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>加入以下内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH</span><br><span class="line"> </span><br><span class="line">export LD_LIBRARY_PATH=/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>激活修改：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="开始安装Caffe"><a href="#开始安装Caffe" class="headerlink" title="开始安装Caffe"></a>开始安装Caffe</h3><ol>
+<li><p>在安装路径下clone：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/BVLC/caffe.git</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>进入Caffe目录，将Makefile.config.example文件复制一份并更名为 Makefile.config：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cp Makefile.config.example Makefile.config</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="利用上一篇教程中下载的OpenCV库"><a href="#利用上一篇教程中下载的OpenCV库" class="headerlink" title="利用上一篇教程中下载的OpenCV库"></a>利用上一篇教程中下载的OpenCV库</h2><h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ol>
+<li>打开Makefile.config文件并修改。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit Makefile.config</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>应用cuDNN、OpenCv 版本，使用Python接口并修改Python路径(修改成如下内容)：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">USE_CUDNN := 1</span><br><span class="line">OPENCV_VERSION := 3</span><br><span class="line">WITH_PYTHON_LAYER := 1</span><br><span class="line">INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include /usr/include/hdf5/serial</span><br><span class="line">LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/hdf5/serial</span><br></pre></td></tr></table></figure></p>
+<p>若后来提示不支持compute_20，则修改为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CUDA_ARCH := -gencode arch=compute_30,code=sm_30 \</span><br><span class="line">		-gencode arch=compute_35,code=sm_35 \</span><br><span class="line">		-gencode arch=compute_50,code=sm_50 \</span><br><span class="line">		-gencode arch=compute_52,code=sm_52 \</span><br><span class="line">		-gencode arch=compute_60,code=sm_60 \</span><br><span class="line">		-gencode arch=compute_61,code=sm_61 \</span><br><span class="line">		-gencode arch=compute_61,code=compute_61</span><br></pre></td></tr></table></figure></p>
+<ol start="2">
+<li>修改Makefile文件。</li>
+</ol>
+<p>将<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NVCCFLAGS +=-ccbin=$(CXX) -Xcompiler-fPIC $(COMMON_FLAGS)</span><br></pre></td></tr></table></figure></p>
+<p>替换为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NVCCFLAGS += -D_FORCE_INLINES -ccbin=$(CXX) -Xcompiler -fPIC $(COMMON_FLAGS)</span><br></pre></td></tr></table></figure></p>
+<p>将<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LIBRARIES += glog gflags protobuf boost_system boost_filesystem m hdf5_hl hdf5</span><br></pre></td></tr></table></figure></p>
+<p>替换为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LIBRARIES += glog gflags protobuf boost_system boost_filesystem m hdf5_serial_hl hdf5_serial</span><br></pre></td></tr></table></figure></p>
+<ol start="3">
+<li><p>开始编译：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make all -j8</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>运行测试：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make runtest -j8</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h3><ol>
+<li></li>
+<li><h2 id="利用Anaconda中的OpenCV库"><a href="#利用Anaconda中的OpenCV库" class="headerlink" title="利用Anaconda中的OpenCV库"></a>利用Anaconda中的OpenCV库</h2>由于始终无法解决方法1中的OpenCV报错，我尝试使用Anaconda中的OpenCV库，完成Caffe的安装。</li>
+<li>打开Makefile.config文件并修改。</li>
+</ol>
 
           
         
@@ -514,7 +559,7 @@
 <p>激活<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure></p>
 <h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><h4 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h4><p>执行下列命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/cuda-8.0/samples/1_Utilities/deviceQuery</span><br><span class="line">sudo make</span><br><span class="line">./deviceQuery</span><br></pre></td></tr></table></figure></p>
 <h4 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h4><p>一个绿色的流体模拟软件。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/NVIDIA_CUDA-9.0_Samples/5_Simulations/fluidsGL</span><br><span class="line">make clean &amp;&amp; make</span><br><span class="line">./fluidsGL</span><br></pre></td></tr></table></figure></p>
-<p>然后你就可以看见一潭绿色污水，用鼠标在上面滑动可以扰动这潭死水  </p>
+<p>然后你就可以看见一潭绿色污水，用鼠标在上面滑动可以扰动这潭死水。  </p>
 <h2 id="cuDNN"><a href="#cuDNN" class="headerlink" title="cuDNN"></a>cuDNN</h2><p>cuDNN是GPU加速计算深层神经网络的库。</p>
 <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ol>
 <li><p>进入<a href="https://developer.nvidia.com/rdp/cudnn-download" target="_blank" rel="noopener">cuDNN官网</a>注册一个账号，选择相应的下载版本。</p>

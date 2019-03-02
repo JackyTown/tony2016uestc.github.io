@@ -798,6 +798,10 @@
 </ol>
 <p>成功安装搜狗输入法后，就可以愉快地进行技术交流了。</p>
 <h2 id="解决时间问题"><a href="#解决时间问题" class="headerlink" title="解决时间问题"></a>解决时间问题</h2><p>Win-Ubuntu双系统的电脑可能会出现时间问题，解决方案如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install ntpdate</span><br><span class="line">sudo ntpdate time.windows.com</span><br><span class="line">sudo hwclock --localtime --systohc</span><br></pre></td></tr></table></figure></p>
+<h2 id="Grub设置"><a href="#Grub设置" class="headerlink" title="Grub设置"></a>Grub设置</h2><h3 id="修改Grub列表的停留时间"><a href="#修改Grub列表的停留时间" class="headerlink" title="修改Grub列表的停留时间"></a>修改Grub列表的停留时间</h3><p>编辑grub文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo /etc/default/grub</span><br></pre></td></tr></table></figure></p>
+<p>修改停留时间：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRUB_TIMEOUT = 30</span><br></pre></td></tr></table></figure></p>
+<h3 id="修改Grub的分辨率"><a href="#修改Grub的分辨率" class="headerlink" title="修改Grub的分辨率"></a>修改Grub的分辨率</h3><p>如果系统的分辨率非常低，在桌面设置里又无法调整。我们就可以通过grub设置，来修改分辨率。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRUB_GFXMODE = 1920 * 1080</span><br></pre></td></tr></table></figure></p>
+<p>执行如下命令，使得修改生效：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update_grub</span><br></pre></td></tr></table></figure></p>
 <h2 id="SS"><a href="#SS" class="headerlink" title="SS"></a>SS</h2><ol>
 <li>执行如下命令，在电脑中安装SS。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install shadowsocks-libev</span><br><span class="line">sudo gedit /etc/shadowsocks-libev/config.json（配置文件）</span><br><span class="line">sudo systemctl <span class="built_in">enable</span> shadowsocks-libev-local@config.service</span><br><span class="line">sudo systemctl start shadowsocks-libev-local@config.service（开机自启）</span><br></pre></td></tr></table></figure>
 </li>
@@ -822,6 +826,16 @@
 <li>选择Use custom proxy，添加代理。</li>
 <li>将代理模式设置为SOCKS5，将代理主机名和端口分别设置为127.0.0.1和1080。</li>
 </ol>
+<h2 id="Screenshot-Tool"><a href="#Screenshot-Tool" class="headerlink" title="Screenshot Tool"></a>Screenshot Tool</h2><p>PrtScr截图太不方便了怎么办？可以借助GNOME shell extension添加桌面截图工具。</p>
+<ol>
+<li><p>执行命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install chrome-gnome-shell</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>进入Google应用商店，安装GNOME Shell integration extension。</p>
+</li>
+<li>进入<a href="https://extensions.gnome.org/" target="_blank" rel="noopener">GNOME extension的网站</a>，搜索ScreenShot Tool，点击右上角的开关激活该工具。</li>
+</ol>
+<p>完成上述步骤，就可以方便地进行截图了。</p>
 <h2 id="VLC"><a href="#VLC" class="headerlink" title="VLC"></a>VLC</h2><p>VLC是一款自由、开源的跨平台多媒体播放器及框架,可播放大多数多媒体文件。</p>
 <p>执行命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install vlc</span><br></pre></td></tr></table></figure></p>
 <p>即可完成安装。</p>

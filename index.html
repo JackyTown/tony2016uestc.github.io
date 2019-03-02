@@ -683,9 +683,9 @@
 <p>其中hd0为系统盘号，0为系统分区。若不确定可通过DiskPart工具中的”lisk disk”和”select disk 0”、”list partition”命令查看。</p>
 <p>注意：”vmlinuz”这一项需和你系统盘中的文件名相一致，若系统盘中的vmlinuz文件没有后缀，则该项也不能有后缀（绝大多数教程中为”vmlinuz.efi”）。否则重启后，在grub引导里找不到Ubuntu系统项。</p>
 <ol start="4">
-<li>重启后，选择NeoSmart的ISO条目，进入grub引导列表，即可开始Ubuntu系统的安装。<h2 id="换源"><a href="#换源" class="headerlink" title="换源"></a>换源</h2></li>
+<li>重启后，选择NeoSmart的ISO条目，进入grub引导列表，即可开始Ubuntu系统的安装。</li>
 </ol>
-<p>装好系统后的第一件事就是更换软件源，不然就不能愉快地完成后续环境的配置了。<br>换源需要修改的配置文件为sources.list，在/etc/apt目录下。  </p>
+<h2 id="换源"><a href="#换源" class="headerlink" title="换源"></a>换源</h2><p>装好系统后的第一件事就是更换软件源，不然就不能愉快地完成后续环境的配置了。<br>换源需要修改的配置文件为sources.list，在/etc/apt目录下。  </p>
 <ol>
 <li><p>打开sources.list文件：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit /etc/apt/sources.list</span><br></pre></td></tr></table></figure>

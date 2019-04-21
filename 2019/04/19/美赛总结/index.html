@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1月份爆肝的日子还历历在目，转眼间到了4月出了结果。最终只拿到了H奖。 赛前准备准备美赛的话，最高效的方法就是看O奖论文。 小组3个人，每人阅读过5篇不同类型的论文后（不同的题型 or 使用了不同的模型），基本上能够熟悉一篇论文的结构和组织，进行适当的模拟练习后，即具备写出一篇结构完整、内容详实的论文的能力了。 当然，如果你是想从A题做到F题，实现全方位无死角覆盖的dalao，那么15篇论文应是远">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2019美赛总结">
+<meta property="og:url" content="http://yoursite.com/2019/04/19/美赛总结/index.html">
+<meta property="og:site_name" content="Towngac">
+<meta property="og:description" content="1月份爆肝的日子还历历在目，转眼间到了4月出了结果。最终只拿到了H奖。 赛前准备准备美赛的话，最高效的方法就是看O奖论文。 小组3个人，每人阅读过5篇不同类型的论文后（不同的题型 or 使用了不同的模型），基本上能够熟悉一篇论文的结构和组织，进行适当的模拟练习后，即具备写出一篇结构完整、内容详实的论文的能力了。 当然，如果你是想从A题做到F题，实现全方位无死角覆盖的dalao，那么15篇论文应是远">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-04-21T15:02:36.691Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2019美赛总结">
+<meta name="twitter:description" content="1月份爆肝的日子还历历在目，转眼间到了4月出了结果。最终只拿到了H奖。 赛前准备准备美赛的话，最高效的方法就是看O奖论文。 小组3个人，每人阅读过5篇不同类型的论文后（不同的题型 or 使用了不同的模型），基本上能够熟悉一篇论文的结构和组织，进行适当的模拟练习后，即具备写出一篇结构完整、内容详实的论文的能力了。 当然，如果你是想从A题做到F题，实现全方位无死角覆盖的dalao，那么15篇论文应是远">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/19/美赛总结/"/>
+
+
+
+
+
+  <title>2019美赛总结 | Towngac</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Towngac</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-something">
+          <a href="/something" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            有料
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/19/美赛总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Towngac">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Towngac">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">2019美赛总结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-19T21:18:04+08:00">
+                2019-04-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>1月份爆肝的日子还历历在目，转眼间到了4月出了结果。最终只拿到了H奖。</p>
+<h1 id="赛前准备"><a href="#赛前准备" class="headerlink" title="赛前准备"></a>赛前准备</h1><p>准备美赛的话，最高效的方法就是看O奖论文。</p>
+<p>小组3个人，每人阅读过5篇不同类型的论文后（不同的题型 or 使用了不同的模型），基本上能够熟悉一篇论文的结构和组织，进行适当的模拟练习后，即具备写出一篇结构完整、内容详实的论文的能力了。</p>
+<p>当然，如果你是想从A题做到F题，实现全方位无死角覆盖的dalao，那么15篇论文应是远远不够的。</p>
+<h2 id="本队情况"><a href="#本队情况" class="headerlink" title="本队情况"></a>本队情况</h2><p>本队3人均有一定的机器学习和深度学习基础，因此我们最初就把目标锁定在C题和E题。C题是大数据题，E题是环境题，但基本上也是做数据分析和建模。A题和B题分别是离散型和连续型，其实也是数据处理类问题，但其有时会和运筹、图论等结合，加之不提供数据，我们将其作为备选方案。而D题和F题，本队从未将其作为备选项。</p>
+<p>本队3人分工比较明确，各有侧重。其中，本人负责写作。不长的准备时间里，编程选手主要负责基本算法和模型的MATLAB、Python实现，以节省正赛中调试程序的时间。而建模、写作选手则专注于阅读论文，总结写作经验，交流建模心得。</p>
+<h1 id="数据题分析及准备"><a href="#数据题分析及准备" class="headerlink" title="数据题分析及准备"></a>数据题分析及准备</h1><h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>针对C题和E题，可以将其中的子问题粗略地分为3类：预测类、评价类、优化类。</p>
+<h3 id="预测类"><a href="#预测类" class="headerlink" title="预测类"></a>预测类</h3><p>预测类是数据题的关键。基本上，C题和E题都会有一个数据预测的小问。毕竟，合理的数据预测可以有效地帮助主办方解决一些实际问题。</p>
+<p>我们将预测题分为三类：</p>
+<p>第一类，时间序列相关的预测问题。主要模型：ARIMA</p>
+<p>第二类，空间相关的预测问题，具有较强的规律。主要模型：马尔科夫、元胞自动机(CA)</p>
+<p>第三类，其他类型的预测问题。主要模型：神经网络<br>P.S：神经网络的解释性较差，其原理不便于用英文描述，可作为论文中略写的验证模型。</p>
+<h3 id="评价类"><a href="#评价类" class="headerlink" title="评价类"></a>评价类</h3><p>评价类也是数据题的重点，一般会让选手针对题目中出现的数据实体构建评价模型，进行排名分析等。</p>
+<p>主要模型：TOPSIS、PROMETHEE等<br>主要算法：PCA、熵权法、聚类、相关性分析等</p>
+<h3 id="优化类"><a href="#优化类" class="headerlink" title="优化类"></a>优化类</h3><p>相比于前面两类，优化类小问出现的概率较低，不是必选项。<br>优化类的方法主要有：模拟退火算法、遗传算法、粒子群优化算法。</p>
+<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>准备阶段，本队阅读了多篇O奖论文。将其中质量较高的文章及其应用模型罗列如下，其中的建模思想和写作方式，都具有极高的参考价值。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">年份</th>
+<th style="text-align:center">控制号</th>
+<th style="text-align:center">模型、算法</th>
+<th style="text-align:center">出彩的模块</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">2016</td>
+<td style="text-align:center">C47823</td>
+<td style="text-align:center">粒子群优化算法</td>
+</tr>
+<tr>
+<td style="text-align:center">2017</td>
+<td style="text-align:center">C55278</td>
+<td style="text-align:center">元胞自动机</td>
+</tr>
+<tr>
+<td style="text-align:center">2018</td>
+<td style="text-align:center">B74316</td>
+<td style="text-align:center">PCA ARMA 马尔科夫</td>
+<td style="text-align:center">灵敏度分析、摘要(非常推荐)</td>
+</tr>
+<tr>
+<td style="text-align:center">2018</td>
+<td style="text-align:center">C72969(CAFE)</td>
+<td style="text-align:center">TOPSIS</td>
+<td style="text-align:center">行文清晰、简洁</td>
+</tr>
+<tr>
+<td style="text-align:center">2018</td>
+<td style="text-align:center">C73767</td>
+<td style="text-align:center">PCA BP神经网络</td>
+</tr>
+<tr>
+<td style="text-align:center">2018</td>
+<td style="text-align:center">C78577</td>
+<td style="text-align:center">ARIMA</td>
+</tr>
+<tr>
+<td style="text-align:center">2018</td>
+<td style="text-align:center">C82150</td>
+<td style="text-align:center">TOPSIS PROMETHEE</td>
+</tr>
+<tr>
+<td style="text-align:center">2018</td>
+<td style="text-align:center">E74971</td>
+<td style="text-align:center">熵权法 聚类 相关性分析 遗传</td>
+<td style="text-align:center">熵权法确定权重，后聚类</td>
+</tr>
+</tbody>
+</table>
+<p>此外，作为写作选手，不掌握Latex怎么能行？不过相比于看语法、听网课等学习方式，笔者有一套更高效的方法：</p>
+<p>网上有美赛的Latex模板，里面有内容的框架，清晰明了。针对框架里没有的操作，如图(单张、双列、多列)、表(花样繁多)、公式(不必记忆，可以现查)、注释等，进行实现。基本上，2天内就可以上手Latex美赛论文，稍加练习后能够实现熟练运用。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>简单说下看了多篇论文后的一些体会吧：O奖论文之所以脱颖而出，并不在于其算法有多高深复杂(也有特例，2017C有一篇全文都是微分方程，非常晦涩难懂)。而是在于其模型完整、条理清晰、有一些新颖的ideas。</p>
+<p>这里对模型完整这一点再做进一步的阐述。比如2018年C题CAFE那一篇，其对于四个州能源状况的分析就非常到位，从经济、环境、人口等多个角度出发，进行数据的处理与分析。而对比之下，本队做该题时，仅仅分析了四个州的能源构成情况。模型在广度和深度上都被吊打，高下立判。</p>
+<h1 id="正式比赛"><a href="#正式比赛" class="headerlink" title="正式比赛"></a>正式比赛</h1><h2 id="选题"><a href="#选题" class="headerlink" title="选题"></a>选题</h2><p>1月25日，北京时间5点50分出了题目。今年的题目，实属诡异，所以我们在7点之前就选定了唯一不那么诡异的E题(讨论后才发现美国政府停摆，没有数据……)。</p>
+<h2 id="建模"><a href="#建模" class="headerlink" title="建模"></a>建模</h2><p>选题的时候，我们以为E题是一个常规的数据题，也想好了评估、预测的相应方法。但是讨论过后，才发现该题没有给数据。于是，难点出现了：如何刻画一个生态系统的价值？(第三天才发现，题目后面给了参考论文列表……)。</p>
+<p>后来，我们在CNKI上找到了一套评估生态系统价值的论文，追根溯源可以找到1997年的某国际论文(该论文在E题的参考论文列表中)。于是，我们就基于这条主线，构建当量因子矩阵，进行生态价值评估。</p>
+<p>有了刻画生态系统价值的具体指标，之后的工作就比较顺利了：基于之前学习的常见模型进行设计和实现，并撰写论文。</p>
+<p>p.s：感觉E题85%以上都是用的这套思路，但我们当初的确没有其他的idea了，于是沿着这条思路一直坐了下去。</p>
+<h2 id="写作"><a href="#写作" class="headerlink" title="写作"></a>写作</h2><p>用了一天时间把基本模型建出来以后(后来在第三天扩充了元胞自动机，用来模拟污染物的扩散)，三个人就都投入写作工作了。但即便这样，论文也是在最后一天的凌晨12点左右完成，又历经了5小时的校验后，最终提交到COMAP邮箱。</p>
+<p>由此可见，完成20页图文并茂、结构清晰的英文论文，算是一件艰巨的任务。</p>
+<h1 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h1><p>总的来说，美赛算是一趟难忘的经历吧。经历了96小时的思考、争吵、妥协、合作，完成一篇全英文的论文。因此，我仍然清晰地记得最后一天通宵完成论文，迎着晨曦、走出科研楼的那一刻。</p>
+<p>美赛其实可以算是一个小型的科研活动：分析问题、提出设想、分析建模、编程实现、完成论文……而我也成功体会到了科研的悲与欢、苦与乐。</p>
+<p>所以，好好享受这么一次难得的经历吧。至于奖项，随缘去吧。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/20/Darknet转Caffe的尝试/" rel="next" title="Darknet转Caffe的尝试">
+                <i class="fa fa-chevron-left"></i> Darknet转Caffe的尝试
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Towngac</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#赛前准备"><span class="nav-number">1.</span> <span class="nav-text">赛前准备</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#本队情况"><span class="nav-number">1.1.</span> <span class="nav-text">本队情况</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据题分析及准备"><span class="nav-number">2.</span> <span class="nav-text">数据题分析及准备</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#分析"><span class="nav-number">2.1.</span> <span class="nav-text">分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#预测类"><span class="nav-number">2.1.1.</span> <span class="nav-text">预测类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#评价类"><span class="nav-number">2.1.2.</span> <span class="nav-text">评价类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优化类"><span class="nav-number">2.1.3.</span> <span class="nav-text">优化类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#准备"><span class="nav-number">2.2.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">2.3.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正式比赛"><span class="nav-number">3.</span> <span class="nav-text">正式比赛</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#选题"><span class="nav-number">3.1.</span> <span class="nav-text">选题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建模"><span class="nav-number">3.2.</span> <span class="nav-text">建模</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#写作"><span class="nav-number">3.3.</span> <span class="nav-text">写作</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#写在最后"><span class="nav-number">4.</span> <span class="nav-text">写在最后</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Towngac</span>
+
+  
+</div>
+
+
+  <!--<div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>"-->
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

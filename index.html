@@ -269,6 +269,146 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/19/商汤实习面试/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Towngac">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Towngac">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/19/商汤实习面试/" itemprop="url">2019美赛总结</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-19T17:05:00+08:00">
+                2019-09-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>一面：<br>总耗时65min。<br>自我介绍：之前做detection和segmentation比较多，进组后想做video相关的工作。</p>
+<p>Q1：简单说说数模的工作。<br>实在是不太记得了……大致说了下，主要分为两个模块：TOPSIS and ARIMA，分别完成评估和预测的工作。<br>Q2：如何对encode特征的？<br>不同地区不同植被的所占百分比。</p>
+<p>Q3：人流监测系统是怎么做的?<br>基于RetinaNet，基于FPN实现特征融合，通过focal loss平衡正负样本。也应用了一些tricks来提升性能，包括提高feature map的resolution和利用soft NMS等。</p>
+<p>Q4：说下场景识别系统的流程？<br>首先，利用YOLO V3提取出图片中的各个物体。其次，计算训练集中各场景下物体的出现频率。最后测试时，利用朴素贝叶斯公式计算图片属于各个场景的概率。</p>
+<p>Q5:YOLO V3利用了k-means来聚类anchor的scale，说说k-means的流程。<br>首先，随机指定k个质心。其次，遍历每个样本，计算其与k个质心的distance。基于距离最小的质心，更新样本的index和distance。最后，基于每个类的所有样本，更新该类的质心。若所有类的质心不再更新，则迭代完成。</p>
+<p>Q6：k值是如何选取的？<br>利用先验知识和工程结果来确定。<br>面试官提示:应该有相关的指标吧，比如说最小化样本到该类质心的距离，还有呢？<br>最大化样本到其他类质心的距离。</p>
+<p>Q7：说说疲劳驾驶检测是怎么做的。<br>首先，利用dlib的detector检测出图片中的人脸，基于的是HOG特征。接着，利于dlib的predictor将人脸特征化，转化为特征矩阵。其次，得到左右眼12个特征点的索引，计算眼睛的宽长比。最后，若该比例连续数帧都小于某阈值，则判定当前驾驶员正处于疲劳状态。</p>
+<p>Q8：对传统视觉有了解吗，滤波等？<br>不知道……最近正在补习。</p>
+<p>Q9：STL知道吧?说说vector和map的底层实现。<br>map的底层实现是红黑树，vector不知道。。。<br>面试官提示：vector是动态分配空间，当空间不够时，申请一个2*current_size的数组，并将之前的内容复制过去。</p>
+<p>Q10：手写代码：归并两升序链表，得到一降序链表。<br>我的思路不太好，想在归并后直接得到降序链表。<br>但实际上，先归并到升序链表，再翻转链表，无疑要更清晰一些。</p>
+<p>Q11：模拟扫雷：在n*n的格子中，排查m个格子是否有雷。<br>思路一：暴力枚举，复杂度……<br>思路二：BFS<br>面试官提示：动态规划。<br>不会……</p>
+<p>Q12：你还有什么问题要问的吗？<br>本菜感觉一般，因此主动加戏：我对于detection的未来发展还有些自己的理解。<br>Q：你说说？<br>A：小物体检测，还有可以提升的地方。比如SNIP，不同resolution的feature map<br>Q：感觉不同scale的样本可能会相互干扰。学会了小物体以后，大物体又学不会了。<br>A：没有试过，但感觉您说的有些道理。<br>Q：了解其他小物体检测的tricks吗？<br>A：提高feature map的resolution，roi align和data augmentation。<br>Q：知道BN吗？<br>A：BN通过归一化，使得各层的数据属于同一分布，主要解决梯度消失的问题。<br>面试官提示：如果数据极其不均衡呢？<br>A：还能平衡样本，防止过拟合。<br>Q：知道GN吗？<br>A：听过，但不熟悉。</p>
+<p>二面：半小时后进行二面，总耗时35min。<br>Q1：对视频方面有什么了解吗？<br>A：看过一篇经典的论文：TSN。核心idea时，利用算法选取出一些snippet，基于这些snippet的预测结果，联合得到视频级的分析结果。</p>
+<p>Q2：听过V3D和C3D吗？<br>没有……</p>
+<p>Q3：听过inceptionNet吗？<br>没有……<br>Q:知道inception结构吗？<br>A:这个知道，有好几个版本。每个版本的网络结构有些不同，但核心是：不同branch会有不同的receptive field，得到不同尺度的特征。<br>Q：这是其中一点哈。</p>
+<p>Q4：一般用什么框架啊？<br>A：Pytorch。<br>Q：单卡、多卡还是多机？<br>A：多卡。<br>Q：知道Pytorch是如何加载模型的吗？<br>A：不清楚……</p>
+<p>Q5：知道卷积核的分解吗？<br>A：不清楚……但我知道group convolution。<br>Q：简单说说？<br>A：知道利用group convolution，参数量可以变为原来的1/G，实现加速的效果。<br>Q：知道不同组的卷积是如何交互的吗？<br>A：不清楚……</p>
+<p>Q6：说说C++的继承和访问限制？</p>
+<p>Q7：说说虚函数<br>Q：那再说说纯虚函数呢？</p>
+<p>Q8：讲讲友元吧。</p>
+<p>Q9：手写代码：从二叉树的侧面观察，将能观察到的结点组合为一个链表。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/19/美赛总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1853,7 +1993,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

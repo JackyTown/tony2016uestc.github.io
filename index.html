@@ -503,9 +503,9 @@
 <p>指导模型去生成和gt类似的图片，也被广泛地用于风格迁移中</p>
 <h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><p>CASI：修补生成管道、联合损失函数<br>全卷积神经网络将图片上下文作为输入，缺失区域采用像素均值填充，缺失区域通过点对点的mask相乘得到。<br>生成网络的输出是一张和input的size相同的合成图，接着使用缺失区域的边界剪裁该图片，放置在图像上下文中，得到一张composite image<br>判别器基于gt来判断output是real还是fake，判别损失被称作对抗损失，联合损失函数是pixel-wise的L2 loss，对抗损失and感性损失。</p>
 <p>A.    全卷积生成网络<br>含有3个blocks，下采样，平滑and上采样</p>
-<p>下采样：扮演了encoder的角色，将size压缩到原图的1/8<br>3个卷积层：4 $\times$ 4的核，步长2，padding1 -&gt; size减半，channel加倍，生成的feature map有更大的感受野<br>2个卷积层：3 <em> 3的核，步长1，padding1 -&gt; 平滑处理，提升网络的capacity<br>4 </em> 4 -&gt; 3 <em> 3 -&gt; 4 </em> 4 -&gt; 3 <em> 3 -&gt; 4 </em> 4</p>
-<p>平滑：强化物体的边界<br>3个3 * 3的卷积层，2个残差块<br>残差块增加了预测的准确性，保持通道数不变</p>
-<p>上采样：扮演decoder的角色，将feature map转化为RGB图片<br>3个4 <em> 4的转置卷积层将resolution放大一倍（最终还原为input size），3个3 </em> 3的卷积层将channel减半</p>
+<p>下采样：扮演了encoder的角色，将size压缩到原图的1/8<br>3个卷积层：4*4的核，步长2，padding1 -&gt; size减半，channel加倍，生成的feature map有更大的感受野<br>2个卷积层：3*3的核，步长1，padding1 -&gt; 平滑处理，提升网络的capacity<br>4*4 -&gt; 3*3 -&gt; 4*4 -&gt; 3*3 -&gt; 4*4</p>
+<p>平滑：强化物体的边界<br>3个3*3的卷积层，2个残差块<br>残差块增加了预测的准确性，保持通道数不变</p>
+<p>上采样：扮演decoder的角色，将feature map转化为RGB图片<br>3个4*4的转置卷积层将resolution放大一倍（最终还原为input size），3个3*3的卷积层将channel减半</p>
 <p>综上，其能够定位基本的边界，保持良好的细节 and 产生连续的结构</p>
 <p>B.    判别网络</p>
 <p>运用了结构相似、深度更浅的下采样block，并移走了所有的3*3卷积层，来预防过拟合。<br>不然，判别器的capacity太大，生成器将没有机会confuse它<br>判别器最后运用一个fc来进行二分类（real or fake）</p>

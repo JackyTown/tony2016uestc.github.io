@@ -409,6 +409,190 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/18/paper/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Towngac">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Towngac">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/18/paper/" itemprop="url">论文阅读：Context-Aware Semantic Inpainting</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-18T15:30:00+08:00">
+                2019-07-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Context-Aware-Semantic-Inpainting"><a href="#Context-Aware-Semantic-Inpainting" class="headerlink" title="Context-Aware Semantic Inpainting"></a>Context-Aware Semantic Inpainting</h1><h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>尽管GAN带来了长足的进步，但大多数GAN使用带FC的自编码架构，不能够精确地保持空间信息；判别器很难理解高层语义，并产生语义相关的内容，这使得评价标准偏向于模糊的结果，不能够描述边缘保存和视觉的真实性。</p>
+<p>本文提出了全卷积的GAN，其能够保存空间结构，并利用修改后的感知损失捕捉高层语义；也引入2种新的评估语义修复的方式。</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>图像修复：填补模糊区域and修补损坏部分</p>
+<p>好的修复结果：不仅真实，各个尺度上都语义相关。<br>第一，着色合理and在空间上连贯<br>第二，结构化特征（突出的轮廓and边缘）应当是连续的<br>第三，纹理应和图像上下文保持一致and包含高频细节</p>
+<p>近来，语义图像修复被规划为一个图像生成问题，并利用GAN来解决 -&gt;<br>GAN：生成器能够生成具有细节的可信内容</p>
+<p>基于GAN的方法有相似的limitations：<br>第一，    encode-decode是一个瓶颈结构-&gt;位置相关信息不能被准确恢复<br>第二，    判别器的input没有利用上下文信息-&gt;不能保证结构连续性和纹理一致性<br>第三，    判别器尝试去理解高层语义，丢弃语义相关的内容</p>
+<p>提出了用于语义修复的卷积GAN<br>第一，    全卷积-&gt;保存更多的空间信息<br>第二，    把区域和上下文合成为一个整体-，并测试合成结果和gt的相似度<br>从high-level深度特征角度定义的Perceptual loss -&gt; 有利于捕捉图片上下文的语义</p>
+<p>L2 loss和PSNR（峰值信噪比）不能够精确评估模糊的结果，也不存在量化的标准，来评估语义恢复的有多好-&gt;定义了local entropy（本地熵误差）and semantic error（语义误差），来分别解决这2个问题。<br>SME：基于置信度的hinge loss<br>实验中，合成的图片可以减少SME-&gt;模型能够推导出有效的语义信息</p>
+<p>总结：这篇文章的贡献。<br>第一，    运用全卷积GAN去恢复图片-&gt;保留空间信息，处理可变尺寸的图片<br>第二，    引入了context-aware（情境感知）的损失函数，能够衡量出合成图和ground truth的相似度<br>第三，    提出了2个新的举措：</p>
+<ol>
+<li>基于middle-level statistics（中间层统计数据）的本地熵损失</li>
+<li>基于高层特征的SME</li>
+</ol>
+<h2 id="Related-work"><a href="#Related-work" class="headerlink" title="Related work"></a>Related work</h2><p>A.    图像修复</p>
+<p>纹理合成、基于分片的合成、通过上下文边界context boundary预测像素、搜索匹配的patch，并缝补它们、计算confidence map来指导内容填充、优先观念传播方法。<br>上述方法尽管生成了一些无缝结合的纹理，但无法生成全局一致的结构<br>大样本填充法（用百万张图片呈现出无缝结合的结果）,<br>但需要完全移除部分模糊的物体</p>
+<p>B.    GAN</p>
+<p>不能较好地保留空间信息<br>不能评估语义和appearance的一致性</p>
+<p>C.    全卷积</p>
+<p>计算量小、保存空间信息、</p>
+<p>D.    Context-aware perceptual loss</p>
+<p>指导模型去生成和gt类似的图片，也被广泛地用于风格迁移中</p>
+<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><p>CASI：修补生成管道、联合损失函数<br>全卷积神经网络将图片上下文作为输入，缺失区域采用像素均值填充，缺失区域通过点对点的mask相乘得到。<br>生成网络的输出是一张和input的size相同的合成图，接着使用缺失区域的边界剪裁该图片，放置在图像上下文中，得到一张composite image<br>判别器基于gt来判断output是real还是fake，判别损失被称作对抗损失，联合损失函数是pixel-wise的L2 loss，对抗损失and感性损失。</p>
+<p>A.    全卷积生成网络<br>含有3个blocks，下采样，平滑and上采样</p>
+<p>下采样：扮演了encoder的角色，将size压缩到原图的1/8<br>3个卷积层：4 <em> 4的核，步长2，padding1 -&gt; size减半，channel加倍，生成的feature map有更大的感受野<br>2个卷积层：3 </em> 3的核，步长1，padding1 -&gt; 平滑处理，提升网络的capacity<br>4 <em> 4 -&gt; 3 </em> 3 -&gt; 4 <em> 4 -&gt; 3 </em> 3 -&gt; 4 * 4</p>
+<p>平滑：强化物体的边界<br>3个3 * 3的卷积层，2个残差块<br>残差块增加了预测的准确性，保持通道数不变</p>
+<p>上采样：扮演decoder的角色，将feature map转化为RGB图片<br>3个4 <em> 4的转置卷积层将resolution放大一倍（最终还原为input size），3个3 </em> 3的卷积层将channel减半</p>
+<p>综上，其能够定位基本的边界，保持良好的细节 and 产生连续的结构</p>
+<p>B.    判别网络</p>
+<p>运用了结构相似、深度更浅的下采样block，并移走了所有的3*3卷积层，来预防过拟合。<br>不然，判别器的capacity太大，生成器将没有机会confuse它<br>判别器最后运用一个fc来进行二分类（real or fake）</p>
+<p>生成网络的每个卷积层后：BN + ReLU<br>判别网络的每个卷积层后：BN + Leaky ReLU</p>
+<p>最后一层使用sigmoid来进行归一化，将pixel value映射为置信度</p>
+<p>C.    损失函数</p>
+<p>第一部分中分析到，现存的基于GAN的语义修复算法，不能够捕捉高层语义and合成与缺失区域语义相关的内容。<br>将合成区域及其上下文综合为一个整体，利用perceptual loss来衡量composite image和gt的相似度。</p>
+<p>联合损失函数是3个loss function的加权组合<br><img src="1.png" alt="avatar"><br>Pixel-wise L2 loss：衡量合成区域和gt的差异<br><img src="2.png" alt="avatar"><br>M是一个二值mask-&gt;只计算缺失区域的loss<br>z是修复结果-&gt;merge了已知的上下文区域and合成的丢失区域<br><img src="3.png" alt="avatar"> </p>
+<p>计算图像空间的loss不能保证生成一张perceptually similar的image, 因为网络会趋向于预测training data的均值。<br>因此实践中，pixel-wise L2 loss只能生成模糊的图片，而没有清晰的边缘和细节的纹理。运用对抗损失和perceptual loss来克服该问题。</p>
+<p>对抗损失定义在判别器的目标函数上。判别器的目的是分辨合成的内容和gt，训练一个判别器则要最小化二分类目标熵。<br><img src="4.png" alt="avatar"><br>判别器D预测的是输入图片是真实图片而不是合成图片的概率。<br>如果二分类目标熵变小，则说明判别器的效果变好</p>
+<p>注意：训练阶段，D并不是预训练or恒定的模型。<br>D和G是轮流训练的<br>最小化二分类目标熵 -&gt; 最大化其相反数<br>而生成器会最小化该值<br><img src="5.png" alt="avatar"><br>运用对抗损失，使得合成区域偏离了使用pixel-wise L2 loss而得到的过度平滑的结果，毕竟真实的图片一般都不是很平滑，有着精细的细节。  </p>
+<p>尽管，使用对抗损失有利于合成结果中出现好的细节，但其离完美还有相当的距离：<br>第一，存在的判别器意识不到图片的上下文。<br>第二，二分类问题还不够具有挑战性，因此判别器不能够较好地学习到各类物体和部分的特征（可能判别器学习的不好，但是得到了正确的结果）<br>注意：语义修复不仅需要合成和上下文一致的纹理，也需要恢复丢失的目标部分，因此就需要从图片上下文中抽取的高层特征。因此，我们基于high-level的语义特征，提出了perceptual loss。</p>
+<p>Perceptual loss<br><img src="6.png" alt="avatar"><br>F：预训练的特征网络，从input中抽取一个通用的全局特征<br>Fj：F第j层的activation结果<br>实验中，将ResNet-18作为F，其倒数第二层的输出作为Fj<br>相似的high-level feature -&gt; 相似的生成图片</p>
+<p>此外，perceptual loss还能够弥补fc中缺失的全局信息，<br>和deepsim不同，本模型的特征基于合成区域和上下文提取。</p>
+<p>D.    Cases：高分辨率 and 不规则形状<br>在refinement前，修复的结果还是粗糙。<br>Refinement -&gt; 最优化<br><img src="7.png" alt="avatar"><br>第一项：逐像素的误差 between refined result &amp; coarse reference<br>第二项：TV loss，增强output的平滑性。越平滑 -&gt; TV loss最小<br>第三项：希望corrupted region的修复结果和原图上其附近的image patch更接近</p>
+<h2 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h2><p>训练阶段需要迭代数次<br>每次迭代中，判别器被更新diters次，生成器训练1次<br>每次更新判别器时，每张训练图片被分为image center &amp; image context。<br>Image center和图像的中心区域一样大，image context采用中央区域的像素均值来填充得到，它们组成了training pair。<br>生成器将context作为input，合成image center。<br>判别器尝试判断合成结果是否为true，计算对抗损失，并更新其参数</p>
+<p>之后，计算pixel-wise的L2 loss，特征网络从合成图中抽取feature，并计算联合损失函数，进行一次生成器的更新</p>
+<p>这个过程将会不断重复，直至联合loss收敛<br>所以，先使用中心像素均值填充每张测试图片的空缺部分，传给CASI生成器。Crop出output的中心区域，将其paste回测试图片，得到最终的结果。</p>
+<p>实现细节：CASI是在DCGAN的顶端实现、使用ADAM进行SGD</p>
+<h2 id="Evaluation"><a href="#Evaluation" class="headerlink" title="Evaluation"></a>Evaluation</h2><p>A.    Perceptual loss的有效性<br>对比4种loss：</p>
+<ol>
+<li>pixel-wise L2 loss</li>
+<li>L2 loss + perceptual loss</li>
+<li>L2 loss + adversarial loss</li>
+<li>L2 loss + adversarial loss + perceptual loss<br>A和b的结果过于平滑，而C和D能够呈现出锐化的细节<br>-&gt; 对抗损失确实缓和L2 loss造成的模糊性<br>比较a和b：a更模糊，b中能看到大量的纹理and褶皱<br>比较c和d：d和上下文的语义更一致</li>
+</ol>
+<p>模糊的结果 -&gt; 更小的mean L2 loss<br>更需要参考mean L1 loss</p>
+<p>B.    Investigation of perceptual loss<br>Perceptual loss的参数会怎样影响结果？<br>对照实验发现。其权重应设为0.2 -&gt; 最低的L1、L2，最高的PSNR</p>
+<p>C.    全卷积架构的有效性<br>增加fc，发现结果变差 -&gt; fc会导致空间结构的丢失</p>
+<p>D.    残差块的有效性<br>Table IV证明了这一点 -&gt; residual block能够规避梯度消失，有利于模型更好的收敛</p>
+<p>E.    高分辨率<br>Motivation：大部分基于网络的修复算法，都只能处理不大于128*128的图片<br>效果好，加了post optimization后效果更好，能够扩展出更多合理的边，保存更多的细节</p>
+<p>F.    Case：通用and自然环境<br>自然环境的图片，带有不规则corrupted region的真实图片，效果很好</p>
+<p>G.    泛化能力<br>CASI vs NN（在训练集中，使用训练集中距离最小的图片的中心进行填充）<br>-&gt; 差距显著，表明CASI并不是简单地copy或者memorize相应的结果</p>
+<p>H.    和SOTA的比较<br>非网络的算法无法恢复high-level的语义<br>Context encoder 很难展现出清晰的结构<br>数值上也全面碾压</p>
+<p>I.    图像恢复的准则<br>structural  similarity  index  (SSIM)<br>feature  similar-ity  index  (FSIM)  </p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>全卷积的GAN &amp; context-aware的joint loss<br>2个新准则 -&gt; 分别评估锐度和语义有效性<br>全面的experiment和comparison<br>缺陷：不能够很好地handle有dense strongly curved lines的corrupted region</p>
+<h2 id="个人心得及体会"><a href="#个人心得及体会" class="headerlink" title="个人心得及体会"></a>个人心得及体会</h2><p>之前了解过CV在图像修复上的应用，但并不熟悉其原理，阅读本文后感觉收获很大。</p>
+<p>本文介绍了基于GAN的图像修复方法，即采用图像生成的方式完成corrupted area的填充，并剖析了其主要弊端，即bottleneck结构和对于semantic的不充分利用。<br>针对这些弊端，提出了全卷积的architecture及context-aware的joint loss，保留了空间信息，提升合成结果和gt在semantic上的相似度。文章整体的思路明确，逻辑清晰，便于读者理解。  </p>
+<p>在experiment部分，论文也从loss、全卷积、残差块、超分辨率、泛化性能等多个角度出发进行比较和分析，证明了其模型的优越性。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/19/美赛总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1819,137 +2003,13 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/22/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Towngac">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Towngac">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/22/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-22T23:02:41+08:00">
-                2018-07-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -1993,7 +2053,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

@@ -513,7 +513,7 @@
 <p>最后一层使用sigmoid来进行归一化，将pixel value映射为置信度</p>
 <p>C.    损失函数</p>
 <p>第一部分中分析到，现存的基于GAN的语义修复算法，不能够捕捉高层语义and合成与缺失区域语义相关的内容。<br>将合成区域及其上下文综合为一个整体，利用perceptual loss来衡量composite image和gt的相似度。</p>
-<p>联合损失函数是3个loss function的加权组合<br><img src="1.png" alt="avatar"><br>Pixel-wise L2 loss：衡量合成区域和gt的差异<br><img src="2.png" alt="avatar"><br>M是一个二值mask-&gt;只计算缺失区域的loss<br>z是修复结果-&gt;merge了已知的上下文区域and合成的丢失区域<br><img src="3.png" alt="avatar"> </p>
+<p>联合损失函数是3个loss function的加权组合<br><img src="paper/1.png" alt="avatar"><br>Pixel-wise L2 loss：衡量合成区域和gt的差异<br><img src="paper/2.png" alt="avatar"><br>M是一个二值mask-&gt;只计算缺失区域的loss<br>z是修复结果-&gt;merge了已知的上下文区域and合成的丢失区域<br><img src="paper/3.png" alt="avatar"> </p>
 <p>计算图像空间的loss不能保证生成一张perceptually similar的image, 因为网络会趋向于预测training data的均值。<br>因此实践中，pixel-wise L2 loss只能生成模糊的图片，而没有清晰的边缘和细节的纹理。运用对抗损失和perceptual loss来克服该问题。</p>
 <p>对抗损失定义在判别器的目标函数上。判别器的目的是分辨合成的内容和gt，训练一个判别器则要最小化二分类目标熵。<br><img src="4.png" alt="avatar"><br>判别器D预测的是输入图片是真实图片而不是合成图片的概率。<br>如果二分类目标熵变小，则说明判别器的效果变好</p>
 <p>注意：训练阶段，D并不是预训练or恒定的模型。<br>D和G是轮流训练的<br>最小化二分类目标熵 -&gt; 最大化其相反数<br>而生成器会最小化该值<br><img src="5.png" alt="avatar"><br>运用对抗损失，使得合成区域偏离了使用pixel-wise L2 loss而得到的过度平滑的结果，毕竟真实的图片一般都不是很平滑，有着精细的细节。  </p>

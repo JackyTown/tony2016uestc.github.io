@@ -93,7 +93,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/07/18/paper/5.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/18/paper/6.png">
 <meta property="og:image" content="http://yoursite.com/2019/07/18/paper/7.png">
-<meta property="og:updated_time" content="2019-10-02T14:31:43.425Z">
+<meta property="og:updated_time" content="2019-10-02T14:41:00.631Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="论文阅读：Context-Aware Semantic Inpainting">
 <meta name="twitter:description" content="Context-Aware Semantic InpaintingSummary尽管GAN带来了长足的进步，但大多数GAN使用带FC的自编码架构，不能够精确地保持空间信息；判别器很难理解高层语义，并产生语义相关的内容，这使得评价标准偏向于模糊的结果，不能够描述边缘保存和视觉的真实性。 本文提出了全卷积的GAN，其能够保存空间结构，并利用修改后的感知损失捕捉高层语义；也引入2种新的评估语义修复的方式">
@@ -361,7 +361,7 @@
 <li>基于高层特征的SME</li>
 </ol>
 <h2 id="Related-work"><a href="#Related-work" class="headerlink" title="Related work"></a>Related work</h2><p>A.    图像修复</p>
-<p>纹理合成、基于分片的合成、通过上下文边界context boundary预测像素、搜索匹配的patch，并缝补它们、计算confidence map来指导内容填充、优先观念传播方法。<br>上述方法尽管生成了一些无缝结合的纹理，但无法生成全局一致的结构<br>大样本填充法（用百万张图片呈现出无缝结合的结果）,<br>但需要完全移除部分模糊的物体</p>
+<p>纹理合成、基于分片的合成、通过上下文边界context boundary预测像素、搜索匹配的patch，并缝补它们、计算confidence map来指导内容填充、优先观念传播方法。<br>上述方法尽管生成了一些无缝结合的纹理，但无法生成全局一致的结构<br>大样本填充法（用百万张图片呈现出无缝结合的结果）, 但需要完全移除部分模糊的物体</p>
 <p>B.    GAN</p>
 <p>不能较好地保留空间信息<br>不能评估语义和appearance的一致性</p>
 <p>C.    全卷积</p>
@@ -370,7 +370,7 @@
 <p>指导模型去生成和gt类似的图片，也被广泛地用于风格迁移中</p>
 <h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><p>CASI：修补生成管道、联合损失函数<br>全卷积神经网络将图片上下文作为输入，缺失区域采用像素均值填充，缺失区域通过点对点的mask相乘得到。<br>生成网络的输出是一张和input的size相同的合成图，接着使用缺失区域的边界剪裁该图片，放置在图像上下文中，得到一张composite image<br>判别器基于gt来判断output是real还是fake，判别损失被称作对抗损失，联合损失函数是pixel-wise的L2 loss，对抗损失and感性损失。</p>
 <p>A.    全卷积生成网络<br>含有3个blocks，下采样，平滑and上采样</p>
-<p>下采样：扮演了encoder的角色，将size压缩到原图的1/8<br>3个卷积层：4 <em> 4的核，步长2，padding1 -&gt; size减半，channel加倍，生成的feature map有更大的感受野<br>2个卷积层：3 </em> 3的核，步长1，padding1 -&gt; 平滑处理，提升网络的capacity<br>4 <em> 4 -&gt; 3 </em> 3 -&gt; 4 <em> 4 -&gt; 3 </em> 3 -&gt; 4 * 4</p>
+<p>下采样：扮演了encoder的角色，将size压缩到原图的1/8<br>3个卷积层：4 $\times$ 4的核，步长2，padding1 -&gt; size减半，channel加倍，生成的feature map有更大的感受野<br>2个卷积层：3 <em> 3的核，步长1，padding1 -&gt; 平滑处理，提升网络的capacity<br>4 </em> 4 -&gt; 3 <em> 3 -&gt; 4 </em> 4 -&gt; 3 <em> 3 -&gt; 4 </em> 4</p>
 <p>平滑：强化物体的边界<br>3个3 * 3的卷积层，2个残差块<br>残差块增加了预测的准确性，保持通道数不变</p>
 <p>上采样：扮演decoder的角色，将feature map转化为RGB图片<br>3个4 <em> 4的转置卷积层将resolution放大一倍（最终还原为input size），3个3 </em> 3的卷积层将channel减半</p>
 <p>综上，其能够定位基本的边界，保持良好的细节 and 产生连续的结构</p>

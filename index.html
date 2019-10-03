@@ -513,14 +513,14 @@
 <p>最后一层使用sigmoid来进行归一化，将pixel value映射为置信度</p>
 <p>C.    损失函数</p>
 <p>第一部分中分析到，现存的基于GAN的语义修复算法，不能够捕捉高层语义and合成与缺失区域语义相关的内容。<br>将合成区域及其上下文综合为一个整体，利用perceptual loss来衡量composite image和gt的相似度。</p>
-<p>联合损失函数是3个loss function的加权组合<br><img src="paper/1.png" alt="avatar"><br><br>Pixel-wise L2 loss：衡量合成区域和gt的差异<br><img src="paper/2.png" alt="avatar"><br><br>M是一个二值mask-&gt;只计算缺失区域的loss<br>z是修复结果-&gt;merge了已知的上下文区域and合成的丢失区域<br><img src="paper/3.png" alt="avatar"><br></p>
+<p>联合损失函数是3个loss function的加权组合<br><br>Pixel-wise L2 loss：衡量合成区域和gt的差异<br><br>M是一个二值mask-&gt;只计算缺失区域的loss<br>z是修复结果-&gt;merge了已知的上下文区域and合成的丢失区域<br></p>
 <p>计算图像空间的loss不能保证生成一张perceptually similar的image, 因为网络会趋向于预测training data的均值。<br>因此实践中，pixel-wise L2 loss只能生成模糊的图片，而没有清晰的边缘和细节的纹理。运用对抗损失和perceptual loss来克服该问题。</p>
-<p>对抗损失定义在判别器的目标函数上。判别器的目的是分辨合成的内容和gt，训练一个判别器则要最小化二分类目标熵。<br><img src="4.png" alt="avatar"><br>判别器D预测的是输入图片是真实图片而不是合成图片的概率。<br>如果二分类目标熵变小，则说明判别器的效果变好</p>
-<p>注意：训练阶段，D并不是预训练or恒定的模型。<br>D和G是轮流训练的<br>最小化二分类目标熵 -&gt; 最大化其相反数<br>而生成器会最小化该值<br><img src="5.png" alt="avatar"><br>运用对抗损失，使得合成区域偏离了使用pixel-wise L2 loss而得到的过度平滑的结果，毕竟真实的图片一般都不是很平滑，有着精细的细节。  </p>
+<p>对抗损失定义在判别器的目标函数上。判别器的目的是分辨合成的内容和gt，训练一个判别器则要最小化二分类目标熵。<br><br>判别器D预测的是输入图片是真实图片而不是合成图片的概率。<br>如果二分类目标熵变小，则说明判别器的效果变好</p>
+<p>注意：训练阶段，D并不是预训练or恒定的模型。<br>D和G是轮流训练的<br>最小化二分类目标熵 -&gt; 最大化其相反数<br>而生成器会最小化该值<br><br>运用对抗损失，使得合成区域偏离了使用pixel-wise L2 loss而得到的过度平滑的结果，毕竟真实的图片一般都不是很平滑，有着精细的细节。  </p>
 <p>尽管，使用对抗损失有利于合成结果中出现好的细节，但其离完美还有相当的距离：<br>第一，存在的判别器意识不到图片的上下文。<br>第二，二分类问题还不够具有挑战性，因此判别器不能够较好地学习到各类物体和部分的特征（可能判别器学习的不好，但是得到了正确的结果）<br>注意：语义修复不仅需要合成和上下文一致的纹理，也需要恢复丢失的目标部分，因此就需要从图片上下文中抽取的高层特征。因此，我们基于high-level的语义特征，提出了perceptual loss。</p>
-<p>Perceptual loss<br><img src="6.png" alt="avatar"><br>F：预训练的特征网络，从input中抽取一个通用的全局特征<br>Fj：F第j层的activation结果<br>实验中，将ResNet-18作为F，其倒数第二层的输出作为Fj<br>相似的high-level feature -&gt; 相似的生成图片</p>
+<p>Perceptual loss<br><br>F：预训练的特征网络，从input中抽取一个通用的全局特征<br>Fj：F第j层的activation结果<br>实验中，将ResNet-18作为F，其倒数第二层的输出作为Fj<br>相似的high-level feature -&gt; 相似的生成图片</p>
 <p>此外，perceptual loss还能够弥补fc中缺失的全局信息，<br>和deepsim不同，本模型的特征基于合成区域和上下文提取。</p>
-<p>D.    Cases：高分辨率 and 不规则形状<br>在refinement前，修复的结果还是粗糙。<br>Refinement -&gt; 最优化<br><img src="7.png" alt="avatar"><br>第一项：逐像素的误差 between refined result &amp; coarse reference<br>第二项：TV loss，增强output的平滑性。越平滑 -&gt; TV loss最小<br>第三项：希望corrupted region的修复结果和原图上其附近的image patch更接近</p>
+<p>D.    Cases：高分辨率 and 不规则形状<br>在refinement前，修复的结果还是粗糙。<br>Refinement -&gt; 最优化<br><br>第一项：逐像素的误差 between refined result &amp; coarse reference<br>第二项：TV loss，增强output的平滑性。越平滑 -&gt; TV loss最小<br>第三项：希望corrupted region的修复结果和原图上其附近的image patch更接近</p>
 <h2 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h2><p>训练阶段需要迭代数次<br>每次迭代中，判别器被更新diters次，生成器训练1次<br>每次更新判别器时，每张训练图片被分为image center &amp; image context。<br>Image center和图像的中心区域一样大，image context采用中央区域的像素均值来填充得到，它们组成了training pair。<br>生成器将context作为input，合成image center。<br>判别器尝试判断合成结果是否为true，计算对抗损失，并更新其参数</p>
 <p>之后，计算pixel-wise的L2 loss，特征网络从合成图中抽取feature，并计算联合损失函数，进行一次生成器的更新</p>
 <p>这个过程将会不断重复，直至联合loss收敛<br>所以，先使用中心像素均值填充每张测试图片的空缺部分，传给CASI生成器。Crop出output的中心区域，将其paste回测试图片，得到最终的结果。</p>
